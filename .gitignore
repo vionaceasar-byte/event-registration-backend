@@ -1,0 +1,17 @@
+# Python Virtual Environment
+venv/
+.venv/
+env/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite database file (contains local runtime data)
+*.db
+*.sqlite3
+
+# Editor / IDE configuration folders
+.vscode/
+.idea/
