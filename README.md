@@ -1,17 +1,17 @@
 # Event Registration Backend API
 
-A clean, beginner-friendly RESTful backend API built with **Python**, **FastAPI**, **SQLite**, and **Pydantic** for managing student registrations for a college tech club workshop.
+This project is a backend API for registering students for a workshop. It was built with FastAPI and SQLite for the Celestius backend recruitment task.
 
 ---
 
-## 📌 Event Details
+## Event Details
 - **Event Name:** Backend Development Workshop
 - **Event Date:** 20 October 2026
 - **Maximum Capacity:** 50 participants
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 - **Language:** Python 3.10+
 - **Framework:** [FastAPI](https://fastapi.tiangolo.com/) (modern, fast web framework for building APIs)
 - **Database:** SQLite (using Python's built-in `sqlite3` module — lightweight, serverless, zero external setup)
@@ -20,31 +20,27 @@ A clean, beginner-friendly RESTful backend API built with **Python**, **FastAPI*
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
-sample/
+event-registration-backend/
 ├── main.py           # FastAPI application, route handlers, constants, and server lifespan
 ├── database.py       # SQLite database connection manager and SQL query helper functions
 ├── schemas.py        # Pydantic schemas for request validation, sanitization, and response models
 ├── requirements.txt  # Python package dependencies
 ├── .gitignore        # Excludes virtual environment, cache files, and SQLite database
-├── test_app.py       # Automated test suite (11 tests verifying all endpoints & edge cases)
+├── test_app.py       # Automated test suite (7 tests verifying all endpoints & edge cases)
 └── README.md         # Comprehensive project documentation
 ```
 
-### Why This Structure?
-- **Separation of Concerns:** `main.py` handles HTTP endpoints, status codes, and routing; `database.py` handles SQL queries and connection lifecycles; `schemas.py` validates and sanitizes incoming data.
-- **Maintainability:** If the database schema changes or fields need updating, you modify one isolated file without breaking the rest of the application.
-
 ---
 
-## ⚙️ Setup and Installation
+## Setup and Installation
 
-### 1. Open Terminal in Project Directory
-Navigate to the project root folder:
+### 1. Clone the Repository
 ```powershell
-cd c:\Users\viona\Downloads\project\sample
+git clone https://github.com/vionaceasar-byte/event-registration-backend.git
+cd event-registration-backend
 ```
 
 ### 2. Create a Virtual Environment
@@ -74,7 +70,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Running the Server
+## Running the Server
 
 Start the development server with live reload enabled:
 ```bash
@@ -89,12 +85,11 @@ INFO:     Application startup complete.
 ```
 
 - **Base URL:** `http://127.0.0.1:8000`
-- **Interactive Swagger API Docs:** `http://127.0.0.1:8000/docs`
-- **Alternative ReDoc Docs:** `http://127.0.0.1:8000/redoc`
+API docs are available at /docs when the server is running.
 
 ---
 
-## 📋 API Endpoints Table
+## API Endpoints Table
 
 | Method | Endpoint | Description | Status Code | Error Codes |
 |---|---|---|---|---|
@@ -106,7 +101,7 @@ INFO:     Application startup complete.
 
 ---
 
-## 🔍 Endpoint Details & Examples
+## Endpoint Details and Examples
 
 ### 1. `POST /register`
 Registers a participant. Server automatically validates fields, verifies capacity and duplicate emails before saving, and attaches a server timestamp.
@@ -191,7 +186,7 @@ Cancels an attendee's registration and automatically frees up their seat.
 
 ---
 
-## ⚠️ Error Cases Handled
+## Error Cases Handled
 
 | Scenario | HTTP Status | Response Body | Why It Triggers |
 |---|---|---|---|
@@ -203,9 +198,19 @@ Cancels an attendee's registration and automatically frees up their seat.
 
 ---
 
-## 🧪 Running Automated Tests
+## Running Automated Tests
 
-Run the full automated test suite (11 tests verifying all endpoints and edge cases):
+Run the full automated test suite (7 tests verifying all endpoints and edge cases):
 ```powershell
-python test_app.py
+python -m pytest
 ```
+
+---
+
+## What I learned
+
+- **What an API endpoint is:** I learned that an API endpoint is a specific URL path that our backend exposes so users or clients can send requests to it, like using POST to send registration data or GET to view attendees.
+- **Why status codes matter (409 vs 404):** I learned how to use correct HTTP status codes to communicate what happened—returning 409 Conflict when an email is already registered, and 404 Not Found when someone looks up an ID that does not exist.
+- **Checking limits before saving:** I learned that business rules like the 50-seat capacity limit must be checked on the server first before saving to the database, ensuring we never exceed capacity.
+- **How SQLite stores data:** I learned how SQLite saves all tables and records directly into a local file (`event.db`), and how parameterized queries with `?` keep database operations clean and safe from SQL injection.
+- **How automated tests work:** I learned how pytest and FastAPI's TestClient let us test every endpoint automatically in code, verifying both success responses and error codes like 400, 404, 409, and 422.
