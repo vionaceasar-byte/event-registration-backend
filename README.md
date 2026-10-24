@@ -6,7 +6,7 @@ This project is a backend API for registering students for a workshop. It was bu
 
 ## Event Details
 - **Event Name:** Backend Development Workshop
-- **Event Date:** 20 October 2026
+- **Event Date:** 24 October 2026
 - **Maximum Capacity:** 50 participants
 
 ---
